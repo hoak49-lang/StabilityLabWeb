@@ -1,7 +1,7 @@
 'use strict';
 let ready;
 async function initialize(){
- importScripts('https://cdn.jsdelivr.net/npm/pyodide@314.0.6/pyodide.js');
+ import { loadPyodide } from 'https://cdn.jsdelivr.net/pyodide/v314.0.6/full/pyodide.mjs';
 const py=await loadPyodide({
   indexURL:'https://cdn.jsdelivr.net/npm/pyodide@314.0.6/'
 });
