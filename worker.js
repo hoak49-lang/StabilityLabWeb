@@ -1,8 +1,10 @@
 'use strict';
 let ready;
 async function initialize(){
-  importScripts('https://cdn.jsdelivr.net/pyodide/v314.0.6/full/pyodide.js');
-  const py=await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v314.0.6/full/'});
+ importScripts('https://cdn.jsdelivr.net/npm/pyodide@314.0.6/pyodide.js');
+const py=await loadPyodide({
+  indexURL:'https://cdn.jsdelivr.net/npm/pyodide@314.0.6/'
+});
   await py.loadPackage(['numpy','scipy']);
   py.FS.mkdirTree('/app/examples');
   const libs=await fetch('./excel-libs.zip');if(!libs.ok)throw Error('Không tải được thư viện Excel');
