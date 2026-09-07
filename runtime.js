@@ -1,5 +1,5 @@
 'use strict';
-const runtimeWorker=new Worker(new URL('./worker.js', location.href));
+const runtimeWorker=new Worker(new URL('./worker.js?v=2', location.href));
 const pending=new Map();let callId=0,loaded=false,failed=false;
 const statusEl=document.getElementById('runtime-status');
 const readyPromise=new Promise((resolve,reject)=>{
