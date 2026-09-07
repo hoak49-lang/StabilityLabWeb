@@ -5,7 +5,13 @@ const statusEl=document.getElementById('runtime-status');
 const readyPromise=new Promise((resolve,reject)=>{
   runtimeWorker.onmessage=({data})=>{
     if(data.ready){loaded=true;statusEl.textContent='Sẵn sàng · Dữ liệu được xử lý trong trình duyệt. Lưu thiết kế/dự án và tải báo cáo trước khi đóng hoặc tải lại trang.';resolve();return;}
-    if(data.fatal){failed=true;statusEl.textContent='Không tải được bộ tính toán. Kiểm tra kết nối Internet và tải lại trang.';reject(Error(statusEl.textContent));return;}
+    if(data.fatal){
+  failed=true;
+  console.error('StabilityLab worker error:', data.fatal);
+  statusEl.textContent='Lỗi bộ tính toán: ' + data.fatal;
+  reject(Error(data.fatal));
+  return;
+}
     const p=pending.get(data.id);if(p){pending.delete(data.id);data.error?p.reject(Error(data.error)):p.resolve(data);}
   };
   runtimeWorker.onerror=()=>{failed=true;const e=Error('Bộ tính toán bị gián đoạn. Hãy tải lại trang và mở dự án đã lưu.');statusEl.textContent=e.message;reject(e);for(const p of pending.values())p.reject(e);pending.clear();};
