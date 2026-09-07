@@ -1,0 +1,8 @@
+.vendor/
+__pycache__/
+*.pyc
+*.log
+*.sqlite3*
+*.db
+runs/
+kinetic_runs/
