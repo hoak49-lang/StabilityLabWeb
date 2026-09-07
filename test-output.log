@@ -1,0 +1,3 @@
+Loading numpy, scipy
+Loaded numpy, scipy
+PASS: WebAssembly runtime, 42-row import, mapping, two-attribute analysis, reference crossing, review blockers, history, three exports, project round-trip, invalid input, Excel template, session clear.
