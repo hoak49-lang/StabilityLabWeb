@@ -12,7 +12,7 @@ async function initialize(){
   py.FS.mkdirTree('/app/examples');
   const libs=await fetch('./excel-libs.zip');if(!libs.ok)throw Error('Không tải được thư viện Excel');
   py.unpackArchive(new Uint8Array(await libs.arrayBuffer()),'zip',{extractDir:'/app'});
-  for(const name of ['bootstrap.py','engine.py','dataio.py','reporting.py','server.py','bridge.py','requirements.txt','examples/demo.csv']){
+  for(const name of ['bootstrap.py','engine.py','dataio.py','reporting.py','server.py','bridge.py','requirements.txt'for(const name of ['bootstrap.py','engine.py','dataio.py','reporting.py','server.py','bridge.py','requirements.txt']){
     const r=await fetch('./'+name);if(!r.ok)throw Error('Không tải được '+name);
     py.FS.writeFile('/app/'+name,new Uint8Array(await r.arrayBuffer()));
   }
