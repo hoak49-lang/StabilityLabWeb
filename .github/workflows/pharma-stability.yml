@@ -1,0 +1,23 @@
+name: Test Pharma Stability
+on:
+  push:
+    paths: ['pharma-stability/**', '.github/workflows/pharma-stability.yml']
+  pull_request:
+    paths: ['pharma-stability/**', '.github/workflows/pharma-stability.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -r pharma-stability/requirements.txt --target pharma-stability/.vendor
+      - run: python -X utf8 -m unittest discover -s pharma-stability/tests -v
+      - run: node pharma-stability/design-test.mjs
