@@ -14,10 +14,13 @@ async function initialize(){
   py.unpackArchive(new Uint8Array(await libs.arrayBuffer()),'zip',{extractDir:'/app'});
   py.unpackArchive(new Uint8Array(await libs.arrayBuffer()),'zip',{extractDir:'/app'});
 
+py.unpackArchive(new Uint8Array(await libs.arrayBuffer()),'zip',{extractDir:'/app'});
+
 for(const name of ['bootstrap.py','engine.py','dataio.py','reporting.py','server.py','bridge.py','requirements.txt']){
   const r=await fetch('./'+name);
   if(!r.ok)throw Error('Không tải được '+name);
   py.FS.writeFile('/app/'+name,new Uint8Array(await r.arrayBuffer()));
+}
 }(const name of ['bootstrap.py','engine.py','dataio.py','reporting.py','server.py','bridge.py','requirements.txt']){
     const r=await fetch('./'+name);if(!r.ok)throw Error('Không tải được '+name);
     py.FS.writeFile('/app/'+name,new Uint8Array(await r.arrayBuffer()));
