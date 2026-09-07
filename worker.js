@@ -1,10 +1,13 @@
 'use strict';
+
+import { loadPyodide } from 'https://cdn.jsdelivr.net/pyodide/v314.0.6/full/pyodide.mjs';
+
 let ready;
+
 async function initialize(){
- import { loadPyodide } from 'https://cdn.jsdelivr.net/pyodide/v314.0.6/full/pyodide.mjs';
-const py=await loadPyodide({
-  indexURL:'https://cdn.jsdelivr.net/npm/pyodide@314.0.6/'
-});
+  const py=await loadPyodide({
+    indexURL:'https://cdn.jsdelivr.net/pyodide/v314.0.6/full/'
+  });
   await py.loadPackage(['numpy','scipy']);
   py.FS.mkdirTree('/app/examples');
   const libs=await fetch('./excel-libs.zip');if(!libs.ok)throw Error('Không tải được thư viện Excel');
